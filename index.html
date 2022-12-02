@@ -48,7 +48,7 @@
           @click="task.done = !task.done"
           :style="{ 'text-decoration': task.done ? 'line-through' : '' }"
         >
-          {{ index + '-' +task.words}}
+          {{ index + 1  + '-' + task.words}}
         </div>
         <div class="th">
           <button class="mx-3 py-3" @click="deletetext(index)">delete</button>
