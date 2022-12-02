@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+
+    <title>Todo list</title>
+    <link rel="stylesheet" href="CSS/bootstrap.min.css" />
+    <link rel="stylesheet" href="CSS/CSS.css" />
+    <script src="./vue (1).js"></script>
+  </head>
+  <body>
+    <div class="container text-center">
+      <h1 class="my-5">Welcome to my To-do list</h1>
+    </div>
+    <div id="app-1">
+      <div class="d-flex justify-content-center w-100 container">
+        <input
+          type="text"
+          class="bg-transparent px-5 py-3 w-50"
+          placeholder="What do you wanna do?"
+          v-model="taskText"
+        />
+        <div class="th">
+          <button
+            class="mx-3 py-3"
+            @click="addText"
+            :disabled="!taskText"
+            id="a12"
+          >
+            add list
+          </button>
+          <button
+            class="mx-3 py-3"
+            v-if="tasks.length &gt; 1"
+            @click="deleteAll"
+          >
+            Delete All
+          </button>
+        </div>
+      </div>
+      <div
+        class="container d-flex justify-content-center mty my-5 w-100"
+        v-for="(task, index) in tasks"
+      >
+        <div
+          class="rt5 px-5 py-3 w-50 bg-transparent d-flex"
+          @click="task.done = !task.done"
+          :style="{ 'text-decoration': task.done ? 'line-through' : '' }"
+        >
+          {{ index + '-' +task.words}}
+        </div>
+        <div class="th">
+          <button class="mx-3 py-3" @click="deletetext(index)">delete</button>
+        </div>
+      </div>
+    </div>
+
+    <script>
+      var app = new Vue({
+        el: "#app-1",
+        data: {
+          tasks: [],
+          taskText: "",
+        },
+        methods: {
+          addText: function () {
+            this.tasks.push({ words: this.taskText, done: false });
+            this.taskText = "";
+          },
+          deletetext: function (index) {
+            this.tasks.splice(index, 1);
+          },
+          deleteAll: function () {
+            this.tasks = [];
+          },
+        },
+      });
+    </script>
+  </body>
+</html>

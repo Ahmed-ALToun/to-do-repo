@@ -1,0 +1,33 @@
+<main>
+
+    <div id="app">
+      <div class="wrapper">
+        <span class="title">
+          <h3>To Doodle App</h3>
+        </span>
+      </div>
+      <hr>
+      <ul>
+        <li v-for="(task, index) in tasks" v-bind:class="{completed:task.selected}">
+          <span class="task" v-if="!task.edit" v-on:click="$set(task, 'edit', !task.edit)">{{ task.todo }} (index: {{ index }})
+          </span>
+          <br>
+          <div v-if="task.edit">
+            <textarea id="editTask" name="editTask" rows="4" cols="50" v-model="task.todo">
+            {{ task.todo }}
+            </textarea>
+          </div>
+  
+          <button v-on:click="$set(task, 'edit', !task.edit)">
+            <span v-if="!task.edit">Edit</span>
+            <span v-if="task.edit">Save</span>
+          </button>
+  
+          <button v-on:click.prevent="removeTask(index)">Remove</button>
+          <button v-on:click="$set(task, 'selected', !task.selected)">Completed</button>
+        </li>
+      </ul>
+      <input v-model="newTask" v-on:keyup.enter="addTask" placeholder="&#xF044 What to do">
+    </div>
+  
+  </main>
